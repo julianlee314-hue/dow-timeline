@@ -1,0 +1,170 @@
+[
+ {
+  "n": 1,
+  "name": "Grover Cleveland",
+  "file": "pres/01.jpg",
+  "license": "Public domain",
+  "artist": "Napoleon Sarony",
+  "page": "https://commons.wikimedia.org/wiki/File:StephenGroverCleveland.jpg"
+ },
+ {
+  "n": 2,
+  "name": "William McKinley",
+  "file": "pres/02.jpg",
+  "license": "Public domain",
+  "artist": "Unknown author",
+  "page": "https://commons.wikimedia.org/wiki/File:McKinley_(cropped).jpg"
+ },
+ {
+  "n": 3,
+  "name": "Theodore Roosevelt",
+  "file": "pres/03.jpg",
+  "license": "Public domain",
+  "artist": "Adam Cuerden",
+  "page": "https://commons.wikimedia.org/wiki/File:Theodore_Roosevelt_by_the_Pach_Bros_(4x5_cropped)_(2).jpg"
+ },
+ {
+  "n": 4,
+  "name": "William Howard Taft",
+  "file": "pres/04.jpg",
+  "license": "Public domain",
+  "artist": "Pach Brothers, restored by Adam Cuerden",
+  "page": "https://commons.wikimedia.org/wiki/File:William_Howard_Taft_by_Pach_Brothers_(3x4_ropped)_(cropped).jpg"
+ },
+ {
+  "n": 5,
+  "name": "Woodrow Wilson",
+  "file": "pres/05.jpg",
+  "license": "Public domain",
+  "artist": "Harris & Ewing, photographer",
+  "page": "https://commons.wikimedia.org/wiki/File:President_Woodrow_Wilson_Harris_%26_Ewing_(3x4_cropped_b).jpg"
+ },
+ {
+  "n": 6,
+  "name": "Warren G. Harding",
+  "file": "pres/06.jpg",
+  "license": "Public domain",
+  "artist": "Harris & Ewing, photographer",
+  "page": "https://commons.wikimedia.org/wiki/File:Warren_G._Harding_1920s_portrait_(3x4_cropped).jpg"
+ },
+ {
+  "n": 7,
+  "name": "Calvin Coolidge",
+  "file": "pres/07.jpg",
+  "license": "Public domain",
+  "artist": "Harris & Ewing",
+  "page": "https://commons.wikimedia.org/wiki/File:President_Calvin_Coolidge,_1924_portrait_photograph_(3x4_cropped_2).jpeg"
+ },
+ {
+  "n": 8,
+  "name": "Herbert Hoover",
+  "file": "pres/08.jpg",
+  "license": "Public domain",
+  "artist": "Underwood & Underwood",
+  "page": "https://commons.wikimedia.org/wiki/File:President_Hoover_portrait.jpg"
+ },
+ {
+  "n": 9,
+  "name": "Franklin D. Roosevelt",
+  "file": "pres/09.jpg",
+  "license": "CC BY 2.0",
+  "artist": "Leon Perskie",
+  "page": "https://commons.wikimedia.org/wiki/File:FDR-1944-Campaign-Portrait_(3x4_retouched,_cropped).jpg"
+ },
+ {
+  "n": 10,
+  "name": "Harry S. Truman",
+  "file": "pres/10.jpg",
+  "license": "Public domain",
+  "artist": "National Archives and Records Administration. Office of Presidential Libraries. Harry S. Truman Library.",
+  "page": "https://commons.wikimedia.org/wiki/File:TRUMAN_58-766-06_(cropped).jpg"
+ },
+ {
+  "n": 11,
+  "name": "Dwight D. Eisenhower",
+  "file": "pres/11.jpg",
+  "license": "Public domain",
+  "artist": "White House",
+  "page": "https://commons.wikimedia.org/wiki/File:Dwight_D._Eisenhower,_official_photo_portrait,_May_29,_1959_(cropped)(3).jpg"
+ },
+ {
+  "n": 12,
+  "name": "John F. Kennedy",
+  "file": "pres/12.jpg",
+  "license": "Public domain",
+  "artist": "Cecil W. Stoughton",
+  "page": "https://commons.wikimedia.org/wiki/File:John_F._Kennedy,_White_House_color_photo_portrait.jpg"
+ },
+ {
+  "n": 13,
+  "name": "Lyndon B. Johnson",
+  "file": "pres/13.jpg",
+  "license": "Public domain",
+  "artist": "Arnold Newman",
+  "page": "https://commons.wikimedia.org/wiki/File:Lyndon_B._Johnson,_photo_portrait,_color_(3x4_cropped)(2).jpg"
+ },
+ {
+  "n": 14,
+  "name": "Richard Nixon",
+  "file": "pres/14.jpg",
+  "license": "Public domain",
+  "artist": "Department of Defense. Department of the Army. Office of the Deputy Chief of Staff for Operations. U.S. Army Audiovisual Center.\t (ca. 1974 - 05/15/1984)",
+  "page": "https://commons.wikimedia.org/wiki/File:Richard_Nixon_presidential_portrait_(1).jpg"
+ },
+ {
+  "n": 15,
+  "name": "Gerald Ford",
+  "file": "pres/15.jpg",
+  "license": "Public domain",
+  "artist": "David Hume Kennerly",
+  "page": "https://commons.wikimedia.org/wiki/File:Gerald_Ford_presidential_portrait_(cropped).jpg"
+ },
+ {
+  "n": 16,
+  "name": "Jimmy Carter",
+  "file": "pres/16.jpg",
+  "license": "Public domain",
+  "artist": "Department of Defense. Department of the Navy. Naval Photographic Center",
+  "page": "https://commons.wikimedia.org/wiki/File:Jimmy_Carter_Official_Portrait2_(3x4_cropped).jpg"
+ },
+ {
+  "n": 17,
+  "name": "Ronald Reagan",
+  "file": "pres/17.jpg",
+  "license": "Public domain",
+  "artist": "Michael Evans",
+  "page": "https://commons.wikimedia.org/wiki/File:Official_Portrait_of_President_Reagan_1981.jpg"
+ },
+ {
+  "n": 18,
+  "name": "George H. W. Bush",
+  "file": "pres/18.jpg",
+  "license": "Public domain",
+  "artist": "David Valdez",
+  "page": "https://commons.wikimedia.org/wiki/File:George_H._W._Bush_presidential_portrait_(cropped)_(2).jpg"
+ },
+ {
+  "n": 19,
+  "name": "Bill Clinton",
+  "file": "pres/19.jpg",
+  "license": "Public domain",
+  "artist": "Bob McNeely, The White House",
+  "page": "https://commons.wikimedia.org/wiki/File:Bill_Clinton.jpg"
+ },
+ {
+  "n": 20,
+  "name": "George W. Bush",
+  "file": "pres/20.jpg",
+  "license": "Public domain",
+  "artist": "Eric Draper",
+  "page": "https://commons.wikimedia.org/wiki/File:George-W-Bush.jpeg"
+ },
+ {
+  "n": 21,
+  "name": "Barack Obama",
+  "file": "pres/21.jpg",
+  "license": "Public domain",
+  "artist": "Official White House Photo by Pete Souza",
+  "page": "https://commons.wikimedia.org/wiki/File:President_Barack_Obama.jpg"
+ }
+]

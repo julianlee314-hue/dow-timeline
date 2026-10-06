@@ -1,0 +1,592 @@
+<title>The Dow, 1896–2016</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Libre+Franklin:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an engraved stock-certificate ledger. One wide chart is the hero, the event card sits beside it, the full register of 121 events follows. */
+:root {
+  --bg: #f3f5f1;
+  --panel: #fbfcfa;
+  --ink: #14231c;
+  --ink-2: #44554c;
+  --muted: #6f7f77;
+  --rule: #d5dcd4;
+  --accent: #1f5c43;
+  --accent-soft: #e2ebe4;
+  --band: #e6ebe4;
+  --pos: #1d7a46;
+  --neg: #b3261e;
+  --c-markets: #2a78d6;
+  --c-war: #eb6834;
+  --c-politics: #1baf7a;
+  --c-innovation: #eda100;
+  --c-disaster: #e87ba4;
+  --c-society: #008300;
+  --f-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --f-body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 0.9375rem;
+  --step-1: 1.125rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(2rem, 5vw, 3.25rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1612; --panel: #151e19; --ink: #e6ede8; --ink-2: #b2c0b7; --muted: #82938a;
+    --rule: #28352e; --accent: #82c9a6; --accent-soft: #1c2b23; --band: #18231d;
+    --pos: #5cc08a; --neg: #f07167;
+    --c-markets: #3987e5; --c-war: #d95926; --c-politics: #199e70; --c-innovation: #c98500; --c-disaster: #d55181; --c-society: #008300;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1612; --panel: #151e19; --ink: #e6ede8; --ink-2: #b2c0b7; --muted: #82938a;
+  --rule: #28352e; --accent: #82c9a6; --accent-soft: #1c2b23; --band: #18231d;
+  --pos: #5cc08a; --neg: #f07167;
+  --c-markets: #3987e5; --c-war: #d95926; --c-politics: #199e70; --c-innovation: #c98500; --c-disaster: #d55181; --c-society: #008300;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: var(--step-0); line-height: 1.55; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 56px; display: grid; gap: 22px; }
+@media (min-width: 720px) { .wrap { padding-inline: 32px; } }
+
+header { display: grid; gap: 6px; }
+.eyebrow { font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--f-display); font-weight: 500; font-size: var(--step-3); line-height: 1.02; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+h1 em { font-style: italic; color: var(--accent); }
+.lede { margin: 4px 0 0; max-width: 68ch; color: var(--ink-2); }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; border-block: 1px solid var(--rule); padding-block: 10px; }
+.group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.group-label { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.chip { font: 500 var(--step--1)/1 var(--f-body); color: var(--ink-2); background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: 7px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.chip:hover { border-color: var(--muted); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip .sw { width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 1.5px var(--panel); }
+.chip.cat[aria-pressed="false"] { opacity: 0.45; }
+.chip.cat[aria-pressed="true"] { background: transparent; color: var(--ink); border-color: var(--muted); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.stage { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 980px) { .stage { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; } }
+
+.chart-box { position: relative; min-width: 0; }
+#chart { display: block; width: 100%; touch-action: manipulation; }
+#chart text { font-family: var(--f-mono); fill: var(--muted); font-size: 11px; }
+#chart .grid line { stroke: var(--rule); stroke-width: 1; }
+#chart .grid .major line { stroke: var(--rule); }
+#chart .axis path { display: none; }
+#chart .axis line { stroke: var(--rule); }
+#chart .band { fill: var(--band); }
+#chart .band-label { font-family: var(--f-display); font-style: italic; font-size: 14px; fill: var(--ink-2); paint-order: stroke; stroke: var(--band); stroke-width: 5px; stroke-linejoin: round; }
+#chart .band-arrow { stroke: var(--muted); stroke-width: 1; fill: none; }
+#chart .price { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; }
+#chart .area { fill: url(#areaGrad); }
+#chart .dot { stroke: var(--panel); stroke-width: 2; cursor: pointer; transition: r 120ms; }
+#chart .dot.dim { opacity: 0.18; }
+#chart .dot-num { font-size: 9.5px; fill: var(--ink-2); text-anchor: middle; pointer-events: none; }
+#chart .sel-ring { fill: none; stroke: var(--ink); stroke-width: 2; pointer-events: none; }
+#chart .sel-line { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; pointer-events: none; }
+#chart .hover-line { stroke: var(--muted); stroke-width: 1; pointer-events: none; }
+#chart .pres rect { stroke: var(--bg); stroke-width: 2; }
+#chart .pres .odd { fill: var(--accent-soft); }
+#chart .pres .even { fill: var(--band); }
+#chart .pres text { fill: var(--ink-2); font-family: var(--f-body); font-size: 10.5px; }
+#chart .pres .cur { fill: var(--ink); }
+#chart .pres .cur + text { fill: var(--bg); }
+.tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; font-size: var(--step--1); line-height: 1.35; box-shadow: 0 6px 18px rgb(0 0 0 / 0.12); max-width: 240px; z-index: 2; }
+.tip b { font-family: var(--f-mono); font-weight: 500; }
+.tip .t-ev { color: var(--ink-2); margin-top: 4px; }
+.hint { font-size: var(--step--1); color: var(--muted); margin: 6px 0 0; }
+
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 20px 20px 18px; display: grid; gap: 12px; min-width: 0; }
+@media (min-width: 980px) { .card { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+.card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.ev-no { font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); }
+.ev-year { font-family: var(--f-display); font-weight: 700; font-size: 3.25rem; line-height: 0.9; font-variant-numeric: lining-nums; }
+.ev-cat { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; }
+.ev-cat .sw { width: 9px; height: 9px; border-radius: 50%; }
+.ev-label { font-family: var(--f-display); font-size: var(--step-1); font-weight: 500; line-height: 1.3; margin: 0; text-wrap: balance; }
+.ev-sum { margin: 0; color: var(--ink-2); }
+.stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.stat { background: var(--panel); padding: 8px 10px; display: grid; gap: 2px; min-width: 0; }
+.stat span { font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.stat b { font-family: var(--f-mono); font-weight: 500; font-variant-numeric: tabular-nums; font-size: var(--step-0); overflow-wrap: anywhere; }
+.up { color: var(--pos); } .down { color: var(--neg); }
+.nav { display: flex; gap: 8px; }
+.nav button { flex: 1; font: 500 var(--step--1) var(--f-body); background: transparent; color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 10px; cursor: pointer; }
+.nav button:hover:not(:disabled) { border-color: var(--muted); }
+.nav button:disabled { opacity: 0.4; cursor: default; }
+.ai-note { font-size: 0.75rem; color: var(--muted); margin: 0; }
+
+.register { display: grid; gap: 14px; }
+.reg-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px; }
+h2 { font-family: var(--f-display); font-weight: 500; font-size: var(--step-2); margin: 0; }
+#q { font: var(--step-0) var(--f-body); color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 12px; width: min(100%, 300px); }
+#q::placeholder { color: var(--muted); }
+.decades { display: grid; gap: 4px 28px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.decade { display: grid; gap: 0; align-content: start; min-width: 0; }
+.decade h3 { font-family: var(--f-mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--muted); margin: 12px 0 2px; border-bottom: 1px solid var(--rule); padding-bottom: 4px; }
+.row { display: grid; grid-template-columns: 2.2em 3.2em 10px minmax(0, 1fr); gap: 8px; align-items: baseline; text-align: left; background: none; border: 0; border-radius: 4px; padding: 5px 6px; color: var(--ink); font: var(--step--1)/1.35 var(--f-body); cursor: pointer; width: 100%; }
+.row:hover { background: var(--accent-soft); }
+.row[aria-current="true"] { background: var(--ink); color: var(--bg); }
+.row[aria-current="true"] .r-n, .row[aria-current="true"] .r-y { color: var(--bg); }
+.row .r-n { font-family: var(--f-mono); color: var(--muted); text-align: right; }
+.row .r-y { font-family: var(--f-mono); font-weight: 500; color: var(--ink-2); }
+.row .sw { width: 8px; height: 8px; border-radius: 50%; align-self: center; }
+.empty { color: var(--muted); }
+
+.vault { display: grid; gap: 14px; border-top: 1px solid var(--rule); padding-top: 18px; }
+.vault-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
+.vault-head h2 { text-wrap: balance; }
+.lens { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; }
+.lens .sw { width: 9px; height: 9px; border-radius: 50%; }
+.vault-body { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .vault-body { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; } }
+.plate { margin: 0; display: grid; gap: 10px; min-width: 0; }
+.plate-frame { position: relative; background: var(--ink); border-radius: 4px; overflow: hidden; display: grid; place-items: center; aspect-ratio: 4 / 3; max-width: 100%; cursor: zoom-in; border: 0; padding: 0; width: 100%; }
+.plate-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.plate-frame .badge { position: absolute; left: 10px; top: 10px; font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; background: var(--panel); color: var(--ink); padding: 4px 8px; border-radius: 3px; }
+.plate figcaption { display: grid; gap: 4px; }
+.plate .cap-title { font-family: var(--f-display); font-size: var(--step-1); line-height: 1.3; }
+.plate .cap-desc { color: var(--ink-2); font-size: var(--step--1); max-width: 70ch; }
+.plate .credit { font-size: 0.75rem; color: var(--muted); }
+.plate .credit a { color: var(--ink-2); }
+.side { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.thumbs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.thumb { padding: 0; border: 2px solid transparent; border-radius: 4px; background: var(--band); cursor: pointer; display: grid; gap: 4px; overflow: hidden; text-align: left; color: var(--ink-2); font: 0.7rem/1.2 var(--f-mono); }
+.thumb img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.thumb span { padding: 2px 6px 6px; text-transform: uppercase; letter-spacing: 0.06em; overflow-wrap: anywhere; }
+.thumb[aria-pressed="true"] { border-color: var(--ink); }
+blockquote.quote { margin: 0; padding: 14px 16px; border-radius: 6px; background: var(--accent-soft); display: grid; gap: 6px; }
+blockquote.quote p { margin: 0; font-family: var(--f-display); font-style: italic; font-size: var(--step-1); line-height: 1.35; text-wrap: balance; }
+blockquote.quote cite { font-style: normal; font-size: var(--step--1); color: var(--ink-2); }
+.vault-empty { color: var(--muted); font-size: var(--step--1); margin: 0; }
+.lightbox { position: fixed; inset: 0; z-index: 10; background: rgb(8 12 10 / 0.92); display: grid; place-items: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px); cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lightbox button { position: absolute; right: 16px; top: calc(env(safe-area-inset-top, 0px) + 12px); font: 500 var(--step--1) var(--f-body); background: #fbfcfa; color: #14231c; border: 0; border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+footer { border-top: 1px solid var(--rule); padding-top: 14px; font-size: var(--step--1); color: var(--muted); display: grid; gap: 6px; max-width: 90ch; }
+footer p { margin: 0; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Dow Jones Industrial Average · 1896–2016 · log scale</div>
+    <h1>120 years of fear, and the <em>market kept climbing</em></h1>
+    <p class="lede">Each dot is one year's headline event, from the first Ford in 1896 to Brexit in 2016. Click any point on the line to read what happened and how the Dow moved that year.</p>
+  </header>
+
+  <div class="controls">
+    <div class="group" id="eras" role="group" aria-label="Zoom to era"><span class="group-label">Era</span></div>
+    <div class="group" id="cats" role="group" aria-label="Event types"><span class="group-label">Events</span></div>
+  </div>
+
+  <div class="stage">
+    <div class="chart-box" id="chartBox">
+      <svg id="chart" role="img" aria-label="Dow Jones Industrial Average 1896 to 2016 on a log scale, with 121 clickable events"></svg>
+      <div class="tip" id="tip" hidden></div>
+      <p class="hint">Tap or click anywhere on the chart to jump to that year's event. Use ← and → to step through.</p>
+    </div>
+
+    <article class="card" id="card" aria-live="polite">
+      <div class="card-top">
+        <div class="ev-year" id="evYear"></div>
+        <div class="ev-no" id="evNo"></div>
+      </div>
+      <div class="ev-cat" id="evCat"></div>
+      <h2 class="ev-label" id="evLabel"></h2>
+      <p class="ev-sum" id="evSum"></p>
+      <div class="stats">
+        <div class="stat"><span>Year end</span><b id="stClose"></b></div>
+        <div class="stat"><span>For year</span><b id="stChg"></b></div>
+        <div class="stat"><span>President</span><b id="stPres"></b></div>
+      </div>
+      <div class="nav">
+        <button type="button" id="prev">← Previous</button>
+        <button type="button" id="next">Next →</button>
+      </div>
+      <p class="ai-note">Summaries written in advance by Claude. Headline in italics is the caption from the original chart. Archive images for this year are below the chart.</p>
+    </article>
+  </div>
+
+  <section class="vault" id="vault" aria-labelledby="vaultTitle">
+    <div class="vault-head">
+      <h2 id="vaultTitle">From the archive</h2>
+      <div class="lens" id="lens"></div>
+    </div>
+    <div class="vault-body">
+      <figure class="plate" id="plate">
+        <button type="button" class="plate-frame" id="plateBtn" aria-label="View image full size"><img id="plateImg" alt=""><span class="badge" id="plateBadge"></span></button>
+        <figcaption>
+          <div class="cap-title" id="capTitle"></div>
+          <div class="cap-desc" id="capDesc"></div>
+          <div class="credit" id="capCredit"></div>
+        </figcaption>
+      </figure>
+      <div class="side">
+        <div class="thumbs" id="thumbs"></div>
+        <blockquote class="quote" id="quote" hidden><p id="quoteText"></p><cite id="quoteCite"></cite></blockquote>
+      </div>
+    </div>
+    <p class="vault-empty" id="vaultEmpty" hidden>No freely licensed artefact was found for this event yet.</p>
+  </section>
+  <div class="lightbox" id="lightbox" hidden><img id="lbImg" alt=""><button type="button" id="lbClose">Close</button></div>
+
+  <section class="register" aria-labelledby="regTitle">
+    <div class="reg-head">
+      <h2 id="regTitle">All 121 events</h2>
+      <input id="q" type="search" placeholder="Search events, e.g. war, bank, moon" aria-label="Search events">
+    </div>
+    <div class="decades" id="list"></div>
+  </section>
+
+  <footer>
+    <p>Events and captions transcribed from the chart “The Dow Jones Industrial Average: 1896–2016” by VirtueofSelfishInvesting.com.</p>
+    <p>Prices are approximate. Year-end closes are from the public DJIA record; the monthly line between them follows the shape of Robert Shiller's monthly S&amp;P index, scaled to match each Dow year-end. Recovery periods mark how long the Dow took to regain a prior peak, as shown on the original chart.</p>
+    <p>Archive images come from Wikimedia Commons and are public domain or Creative Commons licensed. Each one shows its author and license, with a link to its Commons page.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const EVENTS = /*EVENTS*/[];
+const SERIES = /*SERIES*/{};
+const CATS = [
+  { key: "markets", name: "Markets & money" },
+  { key: "war", name: "War & conflict" },
+  { key: "politics", name: "Politics & law" },
+  { key: "innovation", name: "Innovation" },
+  { key: "disaster", name: "Disaster" },
+  { key: "society", name: "Society" }
+];
+const ERAS = [
+  { name: "All years", d: [1896.3, 2017] },
+  { name: "1896–1929", d: [1896.3, 1930] },
+  { name: "1929–1954", d: [1928.5, 1956] },
+  { name: "1954–1982", d: [1953, 1984] },
+  { name: "1982–2016", d: [1981, 2017] }
+];
+const RECOVERY = [
+  { a: 1906.05, b: 1924.9, label: "Recovery time: 19 years" },
+  { a: 1929.67, b: 1954.9, label: "Recovery time: 25 years" },
+  { a: 1966.1, b: 1982.9, label: "Recovery time: 16 years" },
+  { a: 2007.77, b: 2013.2, label: "Recovery time: 6 years" }
+];
+const PRES = [
+  ["Cleveland", 1893.17, 1897.17], ["McKinley", 1897.17, 1901.7], ["T. Roosevelt", 1901.7, 1909.17], ["Taft", 1909.17, 1913.17],
+  ["Wilson", 1913.17, 1921.17], ["Harding", 1921.17, 1923.59], ["Coolidge", 1923.59, 1929.17], ["Hoover", 1929.17, 1933.17],
+  ["F.D. Roosevelt", 1933.17, 1945.28], ["Truman", 1945.28, 1953.05], ["Eisenhower", 1953.05, 1961.05], ["Kennedy", 1961.05, 1963.89],
+  ["Johnson", 1963.89, 1969.05], ["Nixon", 1969.05, 1974.6], ["Ford", 1974.6, 1977.05], ["Carter", 1977.05, 1981.05],
+  ["Reagan", 1981.05, 1989.05], ["G. H. W. Bush", 1989.05, 1993.05], ["Clinton", 1993.05, 2001.05], ["G. W. Bush", 2001.05, 2009.05],
+  ["Obama", 2009.05, 2017.05]
+];
+const M = SERIES.monthly, YE = SERIES.yearEnd;
+const catColor = k => `var(--c-${k})`;
+const catName = k => CATS.find(c => c.key === k).name;
+const fmt = v => v >= 1000 ? d3.format(",.0f")(v) : d3.format(",.2f")(v);
+function valueAt(t) {
+  const i = d3.bisector(d => d[0]).left(M, t);
+  if (i <= 0) return M[0][1];
+  if (i >= M.length) return M[M.length - 1][1];
+  const [t0, v0] = M[i - 1], [t1, v1] = M[i];
+  return Math.exp(Math.log(v0) + (Math.log(v1) - Math.log(v0)) * (t - t0) / (t1 - t0));
+}
+function presidentAt(y) { const p = PRES.find(p => y + 0.5 >= p[1] && y + 0.5 < p[2]); return p ? p[0] : ""; }
+EVENTS.forEach(e => { e.t = e.year + 0.5; e.v = valueAt(e.t); });
+
+const store = { get(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (_) {} } };
+let era = 0, sel = 34, active = new Set(CATS.map(c => c.key)), query = "";
+const hashN = /^#e(\d{1,3})$/.exec(location.hash);
+if (hashN && +hashN[1] >= 1 && +hashN[1] <= 121) sel = +hashN[1];
+else { const s = +store.get("dow-sel"); if (s >= 1 && s <= 121) sel = s; }
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Controls
+const erasEl = document.getElementById("eras");
+ERAS.forEach((e, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip"; b.id = "era-" + i; b.textContent = e.name;
+  b.setAttribute("aria-pressed", i === era);
+  b.onclick = () => { era = i; erasEl.querySelectorAll(".chip").forEach((c, j) => c.setAttribute("aria-pressed", j === i)); draw(true); };
+  erasEl.appendChild(b);
+});
+const catsEl = document.getElementById("cats");
+CATS.forEach(c => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip cat"; b.id = "cat-" + c.key; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i class="sw" style="background:${catColor(c.key)}"></i>${c.name}`;
+  b.onclick = () => {
+    if (active.has(c.key) && active.size === CATS.length) { active = new Set([c.key]); }
+    else if (active.has(c.key)) { active.delete(c.key); if (!active.size) active = new Set(CATS.map(x => x.key)); }
+    else active.add(c.key);
+    catsEl.querySelectorAll(".cat").forEach(x => x.setAttribute("aria-pressed", active.has(x.id.slice(4))));
+    styleDots(); renderList();
+  };
+  catsEl.appendChild(b);
+});
+
+// Chart
+const svg = d3.select("#chart"), box = document.getElementById("chartBox"), tip = document.getElementById("tip");
+const defs = svg.append("defs");
+const grad = defs.append("linearGradient").attr("id", "areaGrad").attr("x1", 0).attr("x2", 0).attr("y1", 0).attr("y2", 1);
+grad.append("stop").attr("offset", "0%").attr("stop-color", "var(--accent)").attr("stop-opacity", 0.22);
+grad.append("stop").attr("offset", "100%").attr("stop-color", "var(--accent)").attr("stop-opacity", 0.02);
+defs.append("clipPath").attr("id", "clip").append("rect");
+const gGrid = svg.append("g").attr("class", "grid");
+const gBands = svg.append("g").attr("clip-path", "url(#clip)");
+const gPlot = svg.append("g").attr("clip-path", "url(#clip)");
+const area = gPlot.append("path").attr("class", "area");
+const line = gPlot.append("path").attr("class", "price");
+const selLine = gPlot.append("line").attr("class", "sel-line");
+const hoverLine = gPlot.append("line").attr("class", "hover-line").attr("visibility", "hidden");
+const gDots = svg.append("g").attr("clip-path", "url(#clip)");
+const selRing = svg.append("circle").attr("class", "sel-ring").attr("clip-path", "url(#clip)");
+const gX = svg.append("g").attr("class", "axis");
+const gY = svg.append("g").attr("class", "axis");
+const gPres = svg.append("g").attr("class", "pres").attr("clip-path", "url(#clipP)");
+defs.append("clipPath").attr("id", "clipP").append("rect");
+const hit = svg.append("rect").attr("fill", "transparent").style("cursor", "pointer");
+
+let x, y, W, H, m;
+const Y_TICKS = [30, 40, 50, 60, 80, 100, 200, 300, 400, 500, 800, 1000, 2000, 3000, 5000, 10000, 20000, 30000];
+
+function draw(animate) {
+  W = box.clientWidth;
+  const narrow = W < 560;
+  m = { t: 14, r: narrow ? 8 : 14, b: 58, l: narrow ? 34 : 54 };
+  H = Math.round(Math.max(340, Math.min(560, W * 0.58)));
+  svg.attr("viewBox", `0 0 ${W} ${H}`).attr("height", H);
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const [d0, d1] = ERAS[era].d;
+  const vis = M.filter(p => p[0] >= d0 && p[0] <= d1);
+  const lo = d3.min(vis, p => p[1]) / 1.18, hi = d3.max(vis, p => p[1]) * 1.18;
+  x = d3.scaleLinear().domain([d0, d1]).range([m.l, m.l + iw]);
+  y = d3.scaleLog().domain([lo, hi]).range([m.t + ih, m.t]);
+  const T = animate && !reduce ? svg.transition().duration(650).ease(d3.easeCubicInOut) : null;
+  const tr = sel => T ? sel.transition(T) : sel;
+
+  svg.select("#clip rect").attr("x", m.l).attr("y", m.t - 10).attr("width", iw).attr("height", ih + 10);
+  svg.select("#clipP rect").attr("x", m.l).attr("y", m.t + ih).attr("width", iw).attr("height", m.b);
+  const ticks = Y_TICKS.filter(t => t >= lo && t <= hi);
+  const yt = ticks.length > (narrow ? 7 : 11) ? ticks.filter(t => /^[1235]/.test(String(t))) : ticks;
+  tr(gGrid).call(g => {
+    const s = gGrid.selectAll("line").data(yt, d => d);
+    s.exit().remove();
+    s.enter().append("line").merge(s).attr("x1", m.l).attr("x2", m.l + iw).attr("y1", d => y(d)).attr("y2", d => y(d));
+  });
+  tr(gY.attr("transform", `translate(${m.l},0)`)).call(d3.axisLeft(y).tickValues(yt).tickFormat(narrow ? d3.format("~s") : d3.format(",")).tickSize(0).tickPadding(8));
+  const span = d1 - d0, step = span > 80 ? (narrow ? 20 : 10) : span > 25 ? (narrow ? 10 : 5) : (narrow ? 5 : 2);
+  const xt = d3.range(Math.ceil(d0 / step) * step, d1 + 0.01, step);
+  tr(gX.attr("transform", `translate(0,${m.t + ih})`)).call(d3.axisBottom(x).tickValues(xt).tickFormat(d3.format("d")).tickSize(4).tickPadding(4));
+
+  // Recovery bands
+  const bands = gBands.selectAll("g.rb").data(RECOVERY);
+  const be = bands.enter().append("g").attr("class", "rb");
+  be.append("rect").attr("class", "band");
+  be.append("path").attr("class", "band-arrow");
+  be.append("text").attr("class", "band-label");
+  const bm = be.merge(bands);
+  tr(bm.select("rect")).attr("x", d => x(d.a)).attr("width", d => Math.max(0, x(d.b) - x(d.a))).attr("y", m.t - 10).attr("height", ih + 10);
+  const ay = m.t + ih - 14;
+  tr(bm.select("path")).attr("d", d => `M${x(d.a) + 3},${ay} H${x(d.b) - 3} M${x(d.a) + 8},${ay - 4} L${x(d.a) + 3},${ay} L${x(d.a) + 8},${ay + 4} M${x(d.b) - 8},${ay - 4} L${x(d.b) - 3},${ay} L${x(d.b) - 8},${ay + 4}`);
+  bm.select("text").text(d => (x(d.b) - x(d.a)) > 150 ? d.label : (x(d.b) - x(d.a)) > 46 ? d.label.replace("Recovery time: ", "") : "")
+    .attr("text-anchor", "middle");
+  tr(bm.select("text")).attr("x", d => (x(d.a) + x(d.b)) / 2).attr("y", ay - 8);
+
+  const lineGen = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
+  const areaGen = d3.area().x(d => x(d[0])).y0(m.t + ih).y1(d => y(d[1])).curve(d3.curveMonotoneX);
+  tr(line).attr("d", lineGen(M));
+  tr(area).attr("d", areaGen(M));
+
+  // Dots
+  const showNums = EVENTS.filter(e => e.t >= d0 && e.t <= d1).length <= 40 && iw > 520;
+  const r = W < 560 ? 3 : 4;
+  const dots = gDots.selectAll("g.ev").data(EVENTS, d => d.n);
+  const de = dots.enter().append("g").attr("class", "ev");
+  de.append("circle").attr("class", "dot").attr("fill", d => catColor(d.cat))
+    .on("click", (ev, d) => { ev.stopPropagation(); select(d.n); });
+  de.append("text").attr("class", "dot-num").text(d => d.n);
+  const dm = de.merge(dots);
+  tr(dm.select("circle")).attr("cx", d => x(d.t)).attr("cy", d => y(d.v)).attr("r", r);
+  dm.select("text").attr("visibility", showNums ? "visible" : "hidden");
+  tr(dm.select("text")).attr("x", d => x(d.t)).attr("y", d => y(d.v) - r - 4);
+  styleDots();
+
+  // Presidents strip
+  const py = m.t + ih + 26;
+  const ps = gPres.selectAll("g").data(PRES);
+  const pe = ps.enter().append("g");
+  pe.append("rect"); pe.append("text").attr("text-anchor", "middle");
+  const pm = pe.merge(ps);
+  pm.select("rect").attr("class", (d, i) => i % 2 ? "odd" : "even");
+  tr(pm.select("rect")).attr("x", d => x(d[1])).attr("width", d => Math.max(0, x(d[2]) - x(d[1]))).attr("y", py).attr("height", 22).attr("rx", 3);
+  pm.select("text").text(d => {
+    const w = x(d[2]) - x(d[1]);
+    if (w > d[0].length * 6.2 + 8) return d[0];
+    const short = d[0].replace(/^.*\s/, "");
+    return w > short.length * 6.2 + 6 ? short : "";
+  });
+  tr(pm.select("text")).attr("x", d => (Math.max(x(d[1]), m.l) + Math.min(x(d[2]), m.l + iw)) / 2).attr("y", py + 15);
+  markPresident();
+
+  hit.attr("x", m.l).attr("y", m.t - 10).attr("width", iw).attr("height", ih + 10);
+  placeSelection(T);
+}
+
+function styleDots() {
+  gDots.selectAll("g.ev").each(function (d) {
+    const ok = active.has(d.cat) && matches(d);
+    d3.select(this).select("circle").classed("dim", !ok);
+  });
+}
+function placeSelection(T) {
+  const e = EVENTS[sel - 1];
+  const s1 = T ? selRing.transition(T) : selRing, s2 = T ? selLine.transition(T) : selLine;
+  s1.attr("cx", x(e.t)).attr("cy", y(e.v)).attr("r", (W < 560 ? 3 : 4) + 4);
+  s2.attr("x1", x(e.t)).attr("x2", x(e.t)).attr("y1", y(e.v) + 9).attr("y2", y.range()[0]);
+}
+function markPresident() {
+  const name = presidentAt(EVENTS[sel - 1].year);
+  gPres.selectAll("rect").classed("cur", d => d[0] === name);
+}
+
+function nearestEvent(t) {
+  const pool = EVENTS.filter(e => active.has(e.cat) && matches(e));
+  const list = pool.length ? pool : EVENTS;
+  return list.reduce((a, b) => Math.abs(b.t - t) < Math.abs(a.t - t) ? b : a);
+}
+hit.on("mousemove", function (ev) {
+  const [px] = d3.pointer(ev, svg.node());
+  const t = x.invert(px), v = valueAt(t), e = nearestEvent(t);
+  const year = Math.floor(t), month = new Date(2000, Math.floor((t - year) * 12), 1).toLocaleString("en-US", { month: "short" });
+  hoverLine.attr("visibility", "visible").attr("x1", px).attr("x2", px).attr("y1", y.range()[1]).attr("y2", y.range()[0]);
+  tip.hidden = false;
+  tip.innerHTML = `<b>${month} ${year}</b> · Dow ≈ <b>${fmt(v)}</b><div class="t-ev">Event ${e.n} · ${e.year}: ${e.label.replace(/--/g, "–")}</div>`;
+  const bw = box.clientWidth, tw = tip.offsetWidth;
+  const sx = px * bw / W;
+  tip.style.left = Math.min(bw - tw - 4, Math.max(4, sx + 12)) + "px";
+  tip.style.top = Math.max(0, y(v) * (svg.node().clientHeight / H) - 70) + "px";
+}).on("mouseleave", () => { tip.hidden = true; hoverLine.attr("visibility", "hidden"); })
+  .on("click", function (ev) { const [px] = d3.pointer(ev, svg.node()); select(nearestEvent(x.invert(px)).n); });
+
+// Card
+const $ = id => document.getElementById(id);
+function renderCard() {
+  const e = EVENTS[sel - 1];
+  $("evYear").textContent = e.year;
+  $("evNo").textContent = `Event ${e.n} of 121`;
+  $("evCat").innerHTML = `<i class="sw" style="background:${catColor(e.cat)}"></i>${catName(e.cat)}`;
+  $("evLabel").innerHTML = "";
+  const em = document.createElement("em"); em.textContent = e.label.replace(/\s*--\s*/g, " – "); $("evLabel").appendChild(em);
+  $("evSum").textContent = e.summary;
+  const close = YE[e.year], prev = YE[e.year - 1];
+  $("stClose").textContent = fmt(close);
+  const c = $("stChg");
+  if (prev) { const p = (close / prev - 1) * 100; c.textContent = (p >= 0 ? "▲ +" : "▼ ") + p.toFixed(1) + "%"; c.className = p >= 0 ? "up" : "down"; }
+  else { c.textContent = "First year"; c.className = ""; }
+  $("stPres").textContent = presidentAt(e.year);
+  $("prev").disabled = sel === 1; $("next").disabled = sel === 121;
+}
+function select(n, scroll) {
+  sel = Math.max(1, Math.min(121, n));
+  store.set("dow-sel", sel);
+  try { history.replaceState(null, "", "#e" + sel); } catch (_) {}
+  const e = EVENTS[sel - 1], [d0, d1] = ERAS[era].d;
+  if (e.t < d0 || e.t > d1) { era = 0; erasEl.querySelectorAll(".chip").forEach((c, j) => c.setAttribute("aria-pressed", j === 0)); draw(true); }
+  else placeSelection(null);
+  markPresident(); renderCard(); art = 0; renderVault();
+  document.querySelectorAll(".row").forEach(r => r.setAttribute("aria-current", +r.dataset.n === sel));
+  if (scroll) document.getElementById("card").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+}
+$("prev").onclick = () => select(sel - 1);
+$("next").onclick = () => select(sel + 1);
+document.addEventListener("keydown", ev => {
+  if (ev.target.matches("input, textarea") || !$("lightbox").hidden) return;
+  if (ev.key === "ArrowLeft") { select(sel - 1); ev.preventDefault(); }
+  if (ev.key === "ArrowRight") { select(sel + 1); ev.preventDefault(); }
+});
+
+const ARTEFACTS = /*ARTEFACTS*/{};
+const LENS = {
+  markets: "Seen through money: front pages, banknotes, certificates and bank runs",
+  war: "Seen through conflict: battlefields, maps and posters",
+  politics: "Seen through power: documents, signings and the people behind them",
+  innovation: "Seen through invention: the machines and the people who built them",
+  disaster: "Seen through catastrophe: the scene and its aftermath",
+  society: "Seen through people: the faces and crowds of the moment"
+};
+let art = 0;
+function niceTitle(a) {
+  const t = a.objname || a.file.replace(/^File:/, "").replace(/\.[a-z]+$/i, "").replace(/_/g, " ");
+  return t.length > 110 ? t.slice(0, 109) + "…" : t;
+}
+function renderVault() {
+  const e = EVENTS[sel - 1], A = (ARTEFACTS[e.n] || {});
+  const items = A.items || [];
+  $("lens").innerHTML = `<i class="sw" style="background:${catColor(e.cat)}"></i>${LENS[e.cat]}`;
+  $("vaultTitle").textContent = `From the archive, ${e.year}`;
+  $("vault").hidden = !Object.keys(ARTEFACTS).length;
+  const has = items.length > 0;
+  $("plate").hidden = !has; $("vaultEmpty").hidden = has;
+  document.querySelector(".side").hidden = !has && !A.quote;
+  if (art >= items.length) art = 0;
+  const th = $("thumbs"); th.innerHTML = "";
+  th.hidden = items.length < 2;
+  items.forEach((a, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "thumb"; b.setAttribute("aria-pressed", i === art);
+    b.innerHTML = `<img loading="lazy" alt=""><span></span>`;
+    b.querySelector("img").src = a.img; b.querySelector("span").textContent = a.type;
+    b.onclick = () => { art = i; renderVault(); };
+    th.appendChild(b);
+  });
+  if (has) {
+    const a = items[art];
+    $("plateImg").src = a.img; $("plateImg").alt = niceTitle(a);
+    $("plateBadge").textContent = a.type;
+    $("capTitle").textContent = niceTitle(a);
+    $("capDesc").textContent = a.desc && a.desc !== a.objname ? a.desc : "";
+    const cr = $("capCredit"); cr.textContent = "";
+    const bits = [a.artist, a.date, a.license].filter(Boolean).join(" · ");
+    cr.append(bits ? bits + " · " : "");
+    const link = document.createElement("a"); link.href = a.page; link.target = "_blank"; link.rel = "noopener"; link.textContent = "Wikimedia Commons";
+    cr.append(link);
+  }
+  const q = A.quote;
+  $("quote").hidden = !q;
+  if (q) { $("quoteText").textContent = "“" + q[0] + "”"; $("quoteCite").textContent = q[1]; }
+}
+$("plateBtn").onclick = () => { $("lbImg").src = $("plateImg").src; $("lbImg").alt = $("plateImg").alt; $("lightbox").hidden = false; $("lbClose").focus(); };
+const closeLb = () => { $("lightbox").hidden = true; $("plateBtn").focus(); };
+$("lightbox").onclick = closeLb;
+document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !$("lightbox").hidden) closeLb(); });
+
+// Register
+function matches(e) { if (!query) return true; const q = query.toLowerCase(); return (e.label + " " + e.summary + " " + e.year).toLowerCase().includes(q); }
+function renderList() {
+  const list = $("list"); list.innerHTML = "";
+  const shown = EVENTS.filter(e => active.has(e.cat) && matches(e));
+  if (!shown.length) { list.innerHTML = `<p class="empty">No events match “${query.replace(/[<>&]/g, "")}”. Try a broader word, or turn more event types back on.</p>`; return; }
+  d3.groups(shown, e => Math.floor(e.year / 10) * 10).forEach(([dec, evs]) => {
+    const col = document.createElement("div"); col.className = "decade";
+    col.innerHTML = `<h3>${dec}s</h3>`;
+    evs.forEach(e => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "row"; b.dataset.n = e.n; b.setAttribute("aria-current", e.n === sel);
+      b.innerHTML = `<span class="r-n">${e.n}</span><span class="r-y">${e.year}</span><i class="sw" style="background:${catColor(e.cat)}"></i><span></span>`;
+      b.lastChild.textContent = e.label.replace(/\s*--\s*/g, " – ");
+      b.onclick = () => select(e.n, true);
+      col.appendChild(b);
+    });
+    list.appendChild(col);
+  });
+}
+$("q").addEventListener("input", ev => { query = ev.target.value.trim(); renderList(); styleDots(); });
+
+draw(false); renderCard(); renderVault(); renderList();
+let rz; new ResizeObserver(() => { clearTimeout(rz); rz = setTimeout(() => draw(false), 80); }).observe(box);
+</script>
