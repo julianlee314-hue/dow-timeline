@@ -4,7 +4,14 @@ An interactive, log-scale chart of the Dow Jones Industrial Average from 1896 to
 
 It is a single static page with no build step. It works on GitHub Pages or any static host.
 
-**Live:** [https://julianlee314-hue.github.io/dow-timeline/](https://julianlee314-hue.github.io/dow-timeline/)
+**Live versions**
+
+| Version | Path | URL |
+|---|---|---|
+| **v0.1** (current root) | `/` | [julianlee314-hue.github.io/dow-timeline/](https://julianlee314-hue.github.io/dow-timeline/) |
+| **v0.2** | `/v0.2/` | [julianlee314-hue.github.io/dow-timeline/v0.2/](https://julianlee314-hue.github.io/dow-timeline/v0.2/) |
+
+The original build stays at the site root. The newer build lives under `v0.2/`.
 
 ## Run locally
 
@@ -32,6 +39,7 @@ Opening `index.html` straight from disk also works in most browsers.
 | `data/artefacts.json` | The archive image list for each event, with titles, authors, licenses and Commons links |
 | `CREDITS.md` | Attribution for every archive image |
 | `tools/` | The scripts used to build the data (see below) |
+| `v0.2/` | Newer site build (same layout), served at `/v0.2/` |
 
 External dependencies: D3 7.9.0 from cdnjs and three Google Fonts (Bodoni Moda, Libre Franklin, IBM Plex Mono).
 
