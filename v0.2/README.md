@@ -2,6 +2,8 @@
 
 An interactive, log-scale chart of the Dow Jones Industrial Average from 1896 to 2026. It shows 131 headline events, one per year, each with a short summary, archive images from Wikimedia Commons, and the Dow's year-end close and change for that year. A presidents strip runs under the chart, and hovering a president opens a short profile with a portrait. A Compare row adds the S&P 500, Nasdaq, a "Mag 7" basket, Nikkei 225, FTSE 100 and DAX, and a Scale switch toggles between price and "rebased to 100" at the start of the view.
 
+Part of the **Chronographs** series — time-spine history sites that open a long line into stories.
+
 It is a single static page with no build step. It works on GitHub Pages or any static host.
 
 ## Run locally
