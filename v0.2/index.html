@@ -65,6 +65,8 @@ body { background: var(--bg); color: var(--ink); font-family: var(--f-body); fon
 
 header { display: grid; gap: 6px; }
 .eyebrow { font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+a.kicker { display: block; width: fit-content; text-decoration: none; }
+a.kicker:hover, a.kicker:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
 h1 { font-family: var(--f-display); font-weight: 500; font-size: var(--step-3); line-height: 1.02; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
 h1 em { font-style: italic; color: var(--accent); }
 .lede { margin: 4px 0 0; max-width: 68ch; color: var(--ink-2); }
@@ -211,7 +213,7 @@ footer p { margin: 0; }
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">A Chronograph</div>
+    <a class="eyebrow kicker" href="https://julianlee314-hue.github.io/chronographs/" title="All Chronographs">A Chronograph</a>
     <div class="eyebrow">Dow Jones Industrial Average · 1896–2026 · log scale</div>
     <h1>130 years of fear, and the <em>market kept climbing</em></h1>
     <p class="lede">Each dot is one year's headline event, from the first Ford in 1896 to the AI boom of the 2020s. Click any point on the line to read what happened and how the Dow moved that year. Switch on other indices to see how the Dow compares.</p>
